@@ -20,7 +20,7 @@
 
 ├── README.md                  # هذا الملف
 ├── train.csv                  # نموذج البيانات للتدريب
-├── text_classification_lstm.py  # الكود الرئيسي/دفتر Jupyter
+├── News Headlines Classification using LSTM.py  # الكود الرئيسي/دفتر Jupyter
 └── LICENSE                    # ملف الترخيص
 ```
 
