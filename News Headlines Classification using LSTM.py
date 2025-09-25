@@ -11,6 +11,8 @@ from tensorflow.keras.preprocessing.text import one_hot
 from sklearn.metrics import confusion_matrix,accuracy_score
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.layers import Embedding,LSTM,Dense,Dropout
+from sklearn.preprocessing import LabelBinarizer
+
 nltk.download('stopwords')
 
 from google.colab import drive
@@ -56,27 +58,17 @@ model.add(Dropout(0.5))
 model.add(LSTM(100))
 model.add(Dropout(0.5))
 model.add(Dense(1))
-
 model.compile(optimizer='adam',loss='binary_crossentropy',metrics=['accuracy'])
-
 model.summary()
-
 
 
 model.fit(X_train,y_train,validation_data=(X_test,y_test),batch_size=64,epochs=40)
 
 
 
+# Make predictions
+y_pred = (model.predict(X_test) > 0.5).astype("int32")
 
-!pip install scikit-learn
-import numpy as np
-from sklearn.metrics import confusion_matrix
-from sklearn.preprocessing import LabelBinarizer
-
-label_binarizer = LabelBinarizer()
-y_test_bin = label_binarizer.fit_transform(y_test)
-
-pred = np.array([0, 1, 2, 3, 4])
-
-cm = confusion_matrix(y_test_bin.argmax(axis=1), pred.argmax(axis=1))
+# Calculate confusion matrix
+cm = confusion_matrix(y_test, y_pred)
 print(cm)
