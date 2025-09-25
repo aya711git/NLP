@@ -18,12 +18,12 @@ from sklearn.preprocessing import LabelBinarizer
 # تحميل قائمة الكلمات الشائعة (Stopwords) من مكتبة NLTK
 nltk.download('stopwords')
 
-# ربط Google Colab مع Google Drive للوصول للملفات
-from google.colab import drive
-drive.mount('/content/drive')
+# قراءة ملف CSV مباشرة من نفس مجلد الكود
+df = pd.read_csv('train.csv')  # تأكد أن ملف train.csv موجود في نفس المجلد
 
-# قراءة ملف البيانات (CSV) من Drive
-df = pd.read_csv('/content/drive/MyDrive/train.csv')
+# أو إذا كان في مجلد فرعي داخل المستودع
+# df = pd.read_csv('data/train.csv')
+
 
 # إزالة أي صفوف تحتوي على قيم فارغة
 df.dropna(inplace=True)
